@@ -56,7 +56,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-impor'./index.css'";
+import "./index.css";
 
 export default defineComponent({
   name: "App"
