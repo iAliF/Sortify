@@ -21,6 +21,9 @@
     <div>
       <input type="file" accept="text/csv" @change="onChange" />
     </div>
+    <div v-if="sortedData">
+      {{ sortedForHtml }}
+    </div>
   </div>
 </template>
 
@@ -30,13 +33,27 @@ import "./index.css";
 
 export default defineComponent({
   name: "App",
+  data() {
+    return {
+      sortedData: ""
+    };
+  },
   methods: {
     onChange(event: InputEvent) {
       const target = event.target as HTMLInputElement;
       const file = target.files?.[0];
       file?.text().then((data: string) => {
-        console.log(data);
+        this.processData(data);
       });
+    },
+    processData(data: string) {
+      const sortedLines = data.split(/\r\n|\r|\n/g).sort();
+      this.sortedData = sortedLines.join("\n");
+    }
+  },
+  computed: {
+    sortedForHtml(): string {
+      return this.sortedData.replace("\n", " | ");
     }
   }
 });
