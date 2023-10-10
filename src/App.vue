@@ -17,8 +17,11 @@
       </a>
     </div>
   </nav>
-
-  <h1>Hello World!</h1>
+  <div class="mt-5">
+    <div>
+      <input type="file" accept="text/csv" @change="onChange" />
+    </div>
+  </div>
 </template>
 
 <script lang="ts">
@@ -26,7 +29,16 @@ import { defineComponent } from "vue";
 import "./index.css";
 
 export default defineComponent({
-  name: "App"
+  name: "App",
+  methods: {
+    onChange(event: InputEvent) {
+      const target = event.target as HTMLInputElement;
+      const file = target.files?.[0];
+      file?.text().then((data: string) => {
+        console.log(data);
+      });
+    }
+  }
 });
 </script>
 
