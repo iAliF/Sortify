@@ -23,6 +23,7 @@
     </div>
     <div v-if="sortedData">
       {{ sortedForHtml }}
+      <button @click="downloadFile">Download File</button>
     </div>
   </div>
 </template>
@@ -49,6 +50,14 @@ export default defineComponent({
     processData(data: string) {
       const sortedLines = data.split(/\r\n|\r|\n/g).sort();
       this.sortedData = sortedLines.join("\n");
+    },
+    downloadFile() {
+      const blob = new Blob([this.sortedData], { type: "text/csv" });
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = "sorted_file.csv";
+      link.click();
+      window.URL.revokeObjectURL(link.href);
     }
   },
   computed: {
