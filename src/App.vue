@@ -17,9 +17,17 @@
       </a>
     </div>
   </nav>
-  <div class="mt-5 text-center">
-    <div>
-      <input type="file" accept="text/csv" @change="onChange" />
+  <div class="mt-5 mx-10 text-center">
+    <div class="form-control">
+      <label class="label">
+        <span class="label-text">Select your file</span>
+      </label>
+      <input
+        class="w-full file-input file-input-bordered"
+        type="file"
+        accept="text/csv"
+        @change="onChange"
+      />
     </div>
     <div v-if="sortedData">
       {{ sortedForHtml }}
