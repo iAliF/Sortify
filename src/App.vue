@@ -17,7 +17,7 @@
       </a>
     </div>
   </nav>
-  <div class="mt-5 mx-10 text-center">
+  <div class="mt-5 mx-4 md:mx-20 lg:mx-36 text-center">
     <div class="form-control">
       <label class="label">
         <span class="label-text">Select your file</span>
