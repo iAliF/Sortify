@@ -39,7 +39,7 @@
 
       <div class="mt-5 card bg-gray-100" v-if="showData">
         <div class="card-body">
-          <p v-html="sortedForHtml"></p>
+          <p v-html="sortedForHtml" class="overflow-y-scroll h-52"></p>
         </div>
 
         <div class="card-actions justify-end">
