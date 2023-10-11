@@ -33,6 +33,19 @@
       <button class="btn btn-neutral" @click="downloadFile">
         Download File
       </button>
+      <button class="btn btn-neutral mx-10" @click="showData = !showData">
+        {{ showData ? "Hide" : "Show" }} sorted data
+      </button>
+
+      <div class="mt-5 card bg-gray-100" v-if="showData">
+        <div class="card-body">
+          <p v-html="sortedForHtml"></p>
+        </div>
+
+        <div class="card-actions justify-end">
+          <button class="btn btn-primary text-white mr-5 mb-5">Copy</button>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -45,7 +58,8 @@ export default defineComponent({
   name: "App",
   data() {
     return {
-      sortedData: ""
+      sortedData: "",
+      showData: false
     };
   },
   methods: {
@@ -71,7 +85,7 @@ export default defineComponent({
   },
   computed: {
     sortedForHtml(): string {
-      return this.sortedData.replace("\n", " | ");
+      return this.sortedData.replaceAll("\n", "<br />");
     }
   }
 });
