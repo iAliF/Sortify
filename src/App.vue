@@ -29,9 +29,10 @@
         @change="onChange"
       />
     </div>
-    <div v-if="sortedData">
-      {{ sortedForHtml }}
-      <button @click="downloadFile">Download File</button>
+    <div v-if="sortedData" class="mt-10">
+      <button class="btn btn-neutral" @click="downloadFile">
+        Download File
+      </button>
     </div>
   </div>
 </template>
