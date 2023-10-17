@@ -38,34 +38,41 @@
         {{ showData ? "Hide" : "Show" }} sorted data
       </button>
 
-      <div class="mt-5 card bg-gray-100" v-if="showData">
-        <div class="card-body">
-          <p v-html="sortedForHtml" class="overflow-y-scroll h-52"></p>
-        </div>
+      <Transition>
+        <div class="mt-5 card bg-gray-100" v-if="showData">
+          <div class="card-body">
+            <p v-html="sortedForHtml" class="overflow-y-scroll h-52"></p>
+          </div>
 
-        <div class="card-actions justify-end">
-          <button class="btn btn-primary text-white mr-5 mb-5" @click="doCopy">
-            Copy
-          </button>
+          <div class="card-actions justify-end">
+            <button
+              class="btn btn-primary text-white mr-5 mb-5"
+              @click="doCopy"
+            >
+              Copy
+            </button>
+          </div>
         </div>
-      </div>
+      </Transition>
 
-      <div class="alert alert-success mt-5" v-if="showAlert">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          class="stroke-current shrink-0 h-6 w-6"
-          fill="none"
-          viewBox="0 0 24 24"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-          />
-        </svg>
-        <span>Copied!</span>
-      </div>
+      <Transition>
+        <div class="alert alert-success mt-5" v-if="showAlert">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="stroke-current shrink-0 h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+            />
+          </svg>
+          <span>Copied!</span>
+        </div>
+      </Transition>
     </div>
   </div>
 </template>
@@ -123,3 +130,15 @@ export default defineComponent({
   }
 });
 </script>
+
+<style scoped>
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
+}
+</style>
