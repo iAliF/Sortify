@@ -6,6 +6,7 @@
       <label class="label">
         <span class="label-text">Select your file</span>
       </label>
+
       <input
         class="w-full file-input file-input-bordered"
         type="file"
@@ -13,6 +14,7 @@
         @change="onChange"
       />
     </div>
+
     <div v-if="sortedData" class="mt-10">
       <button class="btn btn-neutral" @click="downloadFile">
         Download File
@@ -54,6 +56,7 @@
               d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
             />
           </svg>
+
           <span>Copied!</span>
         </div>
       </Transition>
