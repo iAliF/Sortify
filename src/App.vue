@@ -33,6 +33,7 @@
       <button class="btn btn-neutral" @click="downloadFile">
         Download File
       </button>
+
       <button class="btn btn-neutral mx-10" @click="showData = !showData">
         {{ showData ? "Hide" : "Show" }} sorted data
       </button>
@@ -43,8 +44,27 @@
         </div>
 
         <div class="card-actions justify-end">
-          <button class="btn btn-primary text-white mr-5 mb-5">Copy</button>
+          <button class="btn btn-primary text-white mr-5 mb-5" @click="doCopy">
+            Copy
+          </button>
         </div>
+      </div>
+
+      <div class="alert alert-success mt-5" v-if="showAlert">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="stroke-current shrink-0 h-6 w-6"
+          fill="none"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+          />
+        </svg>
+        <span>Copied!</span>
       </div>
     </div>
   </div>
@@ -59,7 +79,8 @@ export default defineComponent({
   data() {
     return {
       sortedData: "",
-      showData: false
+      showData: false,
+      showAlert: false
     };
   },
   methods: {
@@ -81,6 +102,18 @@ export default defineComponent({
       link.download = "sorted_file.csv";
       link.click();
       window.URL.revokeObjectURL(link.href);
+    },
+    copy() {
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(this.sortedData);
+      }
+    },
+    doCopy() {
+      this.copy();
+      this.showAlert = true;
+      setTimeout(() => {
+        this.showAlert = false;
+      }, 2000);
     }
   },
   computed: {
