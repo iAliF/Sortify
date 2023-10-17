@@ -1,22 +1,6 @@
 <template>
-  <nav class="bg-white border-gray-200 dark:bg-gray-900">
-    <div
-      class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4"
-    >
-      <span
-        class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white"
-        >Sortify</span
-      >
+  <SiteNavbar />
 
-      <a
-        href="https://github.com/iAliF/Sortify/"
-        class="block py-2 pr-3"
-        target="_blank"
-      >
-        <img src="./assets/github.svg" alt="GitHub" class="h-8" />
-      </a>
-    </div>
-  </nav>
   <div class="mt-5 mx-4 md:mx-20 lg:mx-36 text-center">
     <div class="form-control">
       <label class="label">
@@ -80,9 +64,11 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import "./index.css";
+import SiteNavbar from "@/components/SiteNavbar.vue";
 
 export default defineComponent({
   name: "App",
+  components: { SiteNavbar },
   data() {
     return {
       sortedData: "",
