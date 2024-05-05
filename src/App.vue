@@ -93,7 +93,17 @@ export default defineComponent({
       });
     },
     processData(data: string) {
-      const sortedLines = data.split(/\r\n|\r|\n/g).sort();
+      const sortedLines = data
+        .split(/\r\n|\r|\n/g)
+        .sort(function (a: string, b: string) {
+          let aSp = a.split("-");
+          let bSp = b.split("-");
+
+          if (aSp.length == 2 && bSp.length == 2 && aSp[0] !== bSp[0])
+            return a.localeCompare(b);
+
+          return parseInt(aSp[1]) < parseInt(bSp[1]) ? 1 : -1;
+        });
       this.sortedData = sortedLines.join("\n");
     },
     downloadFile() {
