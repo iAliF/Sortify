@@ -8,9 +8,9 @@
       </label>
 
       <input
+        accept="text/csv"
         class="w-full file-input file-input-bordered"
         type="file"
-        accept="text/csv"
         @change="onChange"
       />
     </div>
@@ -25,9 +25,9 @@
       </button>
 
       <Transition>
-        <div class="mt-5 card bg-gray-100" v-if="showData">
+        <div v-if="showData" class="mt-5 card bg-gray-100">
           <div class="card-body">
-            <p v-html="sortedForHtml" class="overflow-y-scroll h-52"></p>
+            <p class="overflow-y-scroll h-52" v-html="sortedForHtml"></p>
           </div>
 
           <div class="card-actions justify-end">
@@ -42,18 +42,18 @@
       </Transition>
 
       <Transition>
-        <div class="alert alert-success mt-5" v-if="showAlert">
+        <div v-if="showAlert" class="alert alert-success mt-5">
           <svg
-            xmlns="http://www.w3.org/2000/svg"
             class="stroke-current shrink-0 h-6 w-6"
             fill="none"
             viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
           >
             <path
+              d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
               stroke-linecap="round"
               stroke-linejoin="round"
               stroke-width="2"
-              d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
             />
           </svg>
 
@@ -75,6 +75,7 @@ export default defineComponent({
   data() {
     return {
       sortedData: "",
+      fileName: "",
       showData: false,
       showAlert: false
     };
@@ -83,7 +84,11 @@ export default defineComponent({
     onChange(event: InputEvent) {
       const target = event.target as HTMLInputElement;
       const file = target.files?.[0];
-      file?.text().then((data: string) => {
+
+      if (!file) return;
+
+      this.fileName = file.name;
+      file.text().then((data: string) => {
         this.processData(data);
       });
     },
@@ -95,7 +100,7 @@ export default defineComponent({
       const blob = new Blob([this.sortedData], { type: "text/csv" });
       const link = document.createElement("a");
       link.href = URL.createObjectURL(blob);
-      link.download = "sorted_file.csv";
+      link.download = this.fileName;
       link.click();
       window.URL.revokeObjectURL(link.href);
     },
